@@ -6,6 +6,7 @@ import javax.swing.*;
 public class Fenster extends JComponent implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	public static int key = 0; // 0: nichts, 1: UP, 2: RIGHT, 3: DOWN, 4: LEFT
+	public static int level = 1;
 	public static Spielfeld s = new Spielfeld();
 	public static PacMan p = new PacMan(s.raster_Groesse);
 	public static Geist g1 = new Geist(new Point(14*s.raster_Groesse,9*s.raster_Groesse), 1, Color.RED);
@@ -16,6 +17,24 @@ public class Fenster extends JComponent implements ActionListener {
 	public static int fps = 24; // Bilder pro Sekunde
     public static int refresh = 1000/fps; // in ms
     public static int count = 0;
+	
+	public static void set_spielfeld(int level) {
+    	if(level == 1) {
+    		s.spielfeld1 = s.spielfeld1;
+    	} else if (level == 2) {
+    		s.spielfeld1 = s.spielfeld2;
+    	} else if (level == 3) {
+    		s.spielfeld1 = s.spielfeld3;
+    	}
+    }
+	
+	public static int get_level() {
+    	return level;
+    }
+    
+    public static void set_level(int newLevel) {
+    	level = newLevel;
+    }
 
 	
 	//Hauptmethode
@@ -63,7 +82,7 @@ public class Fenster extends JComponent implements ActionListener {
     }
 
     public static void game_reset() {
-    	s = new Spielfeld();
+    	s.spielfeld1 = s.spielfeld11;
     	p.gameReset(s.raster_Groesse);
     	g1.reset(s.raster_Groesse);
     	g2.reset(s.raster_Groesse);
