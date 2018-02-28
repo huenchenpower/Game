@@ -108,10 +108,17 @@ public class Fenster extends JComponent implements ActionListener {
         g.drawString("Score: " + p.get_score(), s.spielfeld[0].length*s.raster_Groesse - 100, s.spielfeld.length*s.raster_Groesse - 10);
         g.drawString("Leben: " + p.get_leben(), 100, s.spielfeld.length*s.raster_Groesse - 10);
         
+        // Pacman Animation
+        int speed = s.raster_Groesse/2;        
+        int count2 = count*speed;
+        int offenWinkel = count2%90;
+        if(offenWinkel>45) offenWinkel = 45-count2%45;
+        
         //PacMan
         g.setColor(p.get_farbe());
-	    g.fillArc(p.get_position().x + (s.raster_Groesse-p.get_radius())/2, p.get_position().y + (s.raster_Groesse-p.get_radius())/2, p.get_radius(), p.get_radius(),
-	              45 + 90*(p.get_bewegungsrichtung()-1), 275);
+	    g.fillArc(p.get_position().x + (s.raster_Groesse-p.get_radius())/2, 
+	    		p.get_position().y + (s.raster_Groesse-p.get_radius())/2, p.get_radius(), p.get_radius(),
+	              45 + 90*(p.get_bewegungsrichtung()-1)-offenWinkel, 275+offenWinkel*2);
 	    
 	    
 	    //Geist
